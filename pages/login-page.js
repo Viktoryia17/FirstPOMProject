@@ -1,4 +1,7 @@
 export class LoginPage {
+  #emailSelector = "[name='email']";
+  #paswordSelector = "[name='password']";
+  #loginButtonSelector = "[type='submit']"
   constructor(page) {
     this.page = page;
   }
@@ -8,12 +11,17 @@ export class LoginPage {
   }
 
   async login(username, password) {
-    await this.page.locator("[name='email']").fill(username);
-    await this.page.locator("[name='password']").fill(password);
-    await this.page.locator("[type='submit']").click();
+    await this.page.locator( this.#emailSelector ).fill(username);
+    await this.page.locator( this.#paswordSelector).fill(password);
+    await this.page.locator(this.#loginButtonSelector).click();
   }
   async getHeaddertext(){
     return await this.page.locator('h1.tracking-tight').innerText();
   } 
+
+  async getErrorText() {
+    return await this. page.getByText('Неверный email или пароль');
+
+  }
   
 }
