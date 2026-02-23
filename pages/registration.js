@@ -6,6 +6,7 @@ export class RegistrationPage {
     #phonenumberSelector = "[name='phoneNumber']";
   #paswordSelector = "[name='password']";
   #registrationButtonSelector = "[type='submit']"
+  
   constructor(page) {
     this.page = page;
   }
