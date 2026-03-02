@@ -9,7 +9,7 @@ test("add and remove", async ({ page }) => {
     process.env.PLAYWRIGHT_USERNAME,
     process.env.PLAYWRIGHT_USERPASSWORD,
   );
-  const title = await loginPage.getHeaddertext();
+  const title = await loginPage.getHeader();
   expect(title).toEqual("Каталог товаров");
 
   await page
@@ -22,7 +22,7 @@ test("add and remove", async ({ page }) => {
   ).toBeVisible();
 
   await page.getByRole("button", { name: "Оформить заказ" }).click();
-  const title1 = await loginPage.getHeaddertext();
+  const title1 = await loginPage.getHeader();
   expect(title1).toEqual("Каталог товаров");
 
   await expect(page.getByText("Заказ успешно создан!")).toBeVisible();

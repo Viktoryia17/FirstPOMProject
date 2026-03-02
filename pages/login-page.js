@@ -1,25 +1,25 @@
 export class LoginPage {
-  #emailSelector = "[name='email']";
-  #paswordSelector = "[name='password']";
-  #loginButtonSelector = "[type='submit']"
+  #emailRole = "Email";
+  #paswordRole = "Пароль";
+  #loginButtonRole = "Войти"
   constructor(page) {
     this.page = page;
   }
 
   async open() {
-    await this.page.goto("http://localhost:5173/login");
+    await this.page.goto(process.env.BASE_URL + "/login");
   }
 
   async login(username, password) {
-    await this.page.locator( this.#emailSelector ).fill(username);
-    await this.page.locator( this.#paswordSelector).fill(password);
-    await this.page.locator(this.#loginButtonSelector).click();
+    await this.page.getByRole('textbox', { name: this.#emailRole }).fill(username);
+    await this.page.getByRole('textbox', { name: this.#paswordRole}).fill(password);
+    await this.page.getByRole('button', { name: this.#loginButtonRole }).click();
   }
-  async getHeaddertext(){
-    return await this.page.locator('h1.tracking-tight').innerText();
+  async getHeader(){
+    return await page.getByRole('heading', { name: 'Каталог товаров' }).innerText();
   } 
 
-  async getErrorText() {
+  async getErrorMessage() {
     return await this. page.getByText('Неверный email или пароль');
 
   }
