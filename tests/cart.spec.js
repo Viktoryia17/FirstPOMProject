@@ -21,6 +21,6 @@ test("Add product to cart and remove it", async ({ page }) => {
     page.getByRole("heading", { name: "iPhone 15 Pro" }),
   ).toBeVisible();
   await page.getByRole("button", { name: "Удалить" }).click();
-
+  await page.waitForTimeout(500);
   await expect(page.getByText("Ваша корзина пуста")).toBeVisible();
 });

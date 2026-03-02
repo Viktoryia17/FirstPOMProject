@@ -100,8 +100,6 @@ test.beforeEach(async ({page}) => {
 })
 
 test("registrstion", async ({ request, page }) => {
-  
-
   await page.goto("http://localhost:5173/profile");
 
   await expect(page.getByLabel("Email")).toHaveValue(useremail);

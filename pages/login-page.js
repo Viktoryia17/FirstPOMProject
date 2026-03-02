@@ -16,12 +16,12 @@ export class LoginPage {
     await this.page.getByRole('button', { name: this.#loginButtonRole }).click();
   }
   async getHeader(){
-    return await page.getByRole('heading', { name: 'Каталог товаров' }).innerText();
+    return await this.page.getByRole('heading', { name: 'Каталог товаров' }).innerText();
   } 
 
   async getErrorMessage() {
-    return await this. page.getByText('Неверный email или пароль');
-
+    //return await this.page.getByText('Неверный email или пароль');
+    await this.page.waitForTimeout(500);
+    return await this.page.getByRole('listitem');
   }
-  
 }
