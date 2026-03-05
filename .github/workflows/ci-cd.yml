@@ -11,6 +11,9 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      SECRET_NAME: ${{ secrets.SECRET_NAME }}
+
 
     steps:
     - name: Checkout repository
