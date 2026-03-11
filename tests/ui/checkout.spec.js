@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
-import { LoginPage } from "../pages/login-page";
+import { LoginPage } from "../../pages/login-page";
 
-test("Add product to cart and remove it", async ({ page }) => {
+test("add and remove", async ({ page }) => {
   const loginPage = new LoginPage(page);
 
   await loginPage.open();
@@ -20,7 +20,10 @@ test("Add product to cart and remove it", async ({ page }) => {
   await expect(
     page.getByRole("heading", { name: "iPhone 15 Pro" }),
   ).toBeVisible();
-  await page.getByRole("button", { name: "Удалить" }).click();
-  await page.waitForTimeout(500);
-  await expect(page.getByText("Ваша корзина пуста")).toBeVisible();
+
+  await page.getByRole("button", { name: "Оформить заказ" }).click();
+  const title1 = await loginPage.getHeader();
+  expect(title1).toEqual("Каталог товаров");
+
+  await expect(page.getByText("Заказ успешно создан!")).toBeVisible();
 });

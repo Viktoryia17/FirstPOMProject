@@ -57,9 +57,10 @@ test("update", async ({ page }) => {
   await page.getByRole("button", { name: "Сохранить изменения" }).click();
 });*/
 
-import { LoginPage } from "../pages/login-page";
-import { RegistrationPage } from "../pages/registration";
+import { LoginPage } from "../../pages/login-page";
+import { RegistrationPage } from "../../pages/registration";
 import { test, expect } from "@playwright/test";
+import { registeruser } from "../../utils/data.mjs";
 
 const useremail = "akucevicvoktoria" + Math.random() + "@gmail.com";
 const username = "Vika" + Math.random();
@@ -70,20 +71,7 @@ const lastname = "Yakutsevich";
 const phoneNumber = "+987654321";
 //сoздание пользователя через API
 test.beforeAll(async ({request}) => {
-  await request.post(
-    "http://localhost:5173/api/auth/register",
-    {
-      data: {
-        firstname: name,
-        lastname: lastname,
-        phoneNumber: phoneNumber,
-        email: useremail,
-        username: username,
-        password: password,
-        role: "USER",
-      },
-    },
-  );
+ await registeruser({request, name, lastname, phoneNumber, useremail, username, password});
 });
 
 test.beforeEach(async ({page}) => {

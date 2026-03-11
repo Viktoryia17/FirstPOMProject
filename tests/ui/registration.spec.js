@@ -1,7 +1,7 @@
 import { test} from '@playwright/test';
 
 
-import { RegistrationPage } from '../pages/registration';
+import { RegistrationPage } from '../../pages/registration';
 
 
 const user = {
