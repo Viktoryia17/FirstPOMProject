@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 
 const BASE_URL = process.env.BASE_URL; 
 
-test("correct login API", async ({ request }) => {
+test("Registration with correct login API", async ({ request }) => {
 
   const response = await request.post(
     `${BASE_URL}/api/auth/login`,
@@ -19,10 +19,14 @@ test("correct login API", async ({ request }) => {
   expect(response.status()).toBe(201);
 
   const body = await response.json();
-  expect(body).toBeTruthy(); 
+  console.log (body);
+ //ответ от сервера
+  expect(body.email).toEqual(process.env.PLAYWRIGHT_USERNAME);
+ 
+
 });
 
-test("incorrect login API", async ({ request }) => {
+test("Registration with incorrect login API", async ({ request }) => {
 
   const response = await request.post(
     `${BASE_URL}/api/auth/login`,
@@ -36,5 +40,5 @@ test("incorrect login API", async ({ request }) => {
 
   // проверяем что логин НЕ успешный
   expect(response.ok()).toBeFalsy();
-  expect(response.status()).toBeGreaterThanOrEqual(400);
+  expect(response.status()).toEqual(401);
 });
